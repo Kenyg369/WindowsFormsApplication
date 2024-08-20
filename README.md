@@ -7,6 +7,7 @@ Lib used: Sunny UI
 Account Information is saved in Account Information.txt file under:/bin/Debug/
 \
 .exe is generated under:/bin/Debug/
+\
 ![image](https://github.com/user-attachments/assets/fd45483b-ba6d-490e-ad2d-0200954be234)
 \
 userName, accountName, passWord and accountBalance data are "," separated 
