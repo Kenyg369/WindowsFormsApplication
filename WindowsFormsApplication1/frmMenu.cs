@@ -32,6 +32,7 @@ namespace WindowsFormsApplication1
             currentUserName = userAccounts.First().UserName;
 
             InitializeComponent();
+            UILocalizeHelper.SetEN();
         }
 
 
@@ -60,8 +61,38 @@ namespace WindowsFormsApplication1
             this.uiComboBox2.SelectedIndex = 0;
         }
 
+        private void LoadAccountsFromFile()
+        {
+            userAccounts.Clear(); // Clean the cuurent user/account list
+
+            string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Account Information.txt");
+            string[] lines = File.ReadAllLines(filePath).Skip(1).ToArray(); // Skip the 1st line(title line)
+
+            foreach (string line in lines)
+            {
+                string[] parts = line.Split(',');
+
+                if (parts.Length == 4)
+                {
+                    string userName = parts[0];
+                    string accountName = parts[1];
+                    string password = parts[2];
+                    double accountBalance = double.Parse(parts[3]);
+
+                    if (userName == currentUserName) // Only load current user's account
+                    {
+                        AccountInformation account = new AccountInformation(userName, accountName, password, accountBalance);
+                        userAccounts.Add(account);
+                    }
+                }
+            }
+        }
+
+
         private void uiComboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            // Reload the content from the txt file to extract the updated balance 
+            LoadAccountsFromFile();
             foreach (AccountInformation account in userAccounts)
             {
                 if (account.AccountName == uiComboBox1.Items[uiComboBox1.SelectedIndex].ToString())

@@ -14,6 +14,7 @@ namespace WindowsFormsApplication1
         public frmLogin()
         {
             InitializeComponent();
+            UILocalizeHelper.SetEN();
             LoadAccounts();
         }
         private void LoadAccounts()
@@ -61,7 +62,7 @@ namespace WindowsFormsApplication1
 
             if (userAccounts.Count > 0)
             {
-                UIMessageBox.Show("Log in successfully！", "Infor", UIStyle.Green, UIMessageBoxButtons.OK, true);
+                UIMessageBox.Show("Log in successfully!", "Infor", UIStyle.Green, UIMessageBoxButtons.OK, true);
 
                 frmMenu frm = new frmMenu(userAccounts);
                 frm.ShowDialog();
@@ -69,7 +70,7 @@ namespace WindowsFormsApplication1
             }
             else
             {
-                UIMessageBox.Show("Wrong user name or password！", "Error", UIStyle.Red, UIMessageBoxButtons.OK, true);
+                UIMessageBox.Show("Wrong user name or password!", "Error", UIStyle.Red, UIMessageBoxButtons.OK, true);
             }
 
 
